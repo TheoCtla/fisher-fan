@@ -1041,13 +1041,9 @@ components:
           format: float
           description: Price of the trip
         user:
-          allOf:
-            - $ref: "#/components/schemas/User"
-            - description: User organizing the trip
+          $ref: "#/components/schemas/User"
         boat:
-          allOf:
-            - $ref: "#/components/schemas/Boat"
-            - description: Boat used for the trip
+          $ref: "#/components/schemas/Boat"
 
     Reservation:
       type: object
@@ -1110,9 +1106,7 @@ components:
           type: boolean
           description: Was the fish released? (true = yes, false = no)
         owner:
-          allOf:
-            - $ref: "#/components/schemas/User"
-            - description: Owner of the fishing logbook
+          $ref: "#/components/schemas/User"
 
 tags:
   - name: Users
