@@ -1,9 +1,9 @@
-package api
+package handlers
 
 import (
 	"github.com/gin-gonic/gin"
 )
 
-func getBoatsHandler(c *gin.Context) {
+func GetBoatsHandler(c *gin.Context) {
 	// Implementation for getting all boats
 }
