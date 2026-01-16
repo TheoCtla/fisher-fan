@@ -17,13 +17,15 @@ func InitServer() {
 	v2 := apiGroup.Group("/v2")
 	{
 		healthV1 := v1.Group("/health")
-		healthV2 := v2.Group("/health")
-
+		boatV1 := v1.Group("/boats")
 		routesV1.Health(healthV1)
+		routesV1.RegisterBoatRoutes(boatV1)
+
+		healthV2 := v2.Group("/health")
 		routesV2.Health(healthV2)
 	}
 
-	err := router.Run(fmt.Sprintf("%s:%s", variables.Adress, variables.Port))
+	err := router.Run(fmt.Sprintf("%s:%s", variables.Address, variables.Port))
 	if err != nil {
 		panic(err)
 	}

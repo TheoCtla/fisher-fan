@@ -4,8 +4,8 @@ import "os"
 
 // Configuration du serveur
 var (
-	Adress = getEnv("SERVER_ADDRESS", "0.0.0.0")
-	Port   = getEnv("SERVER_PORT", "8080")
+	Address = getEnv("SERVER_ADDRESS", "0.0.0.0")
+	Port    = getEnv("SERVER_PORT", "8080")
 )
 
 // Configuration de la base de données PostgreSQL
