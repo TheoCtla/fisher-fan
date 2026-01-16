@@ -23,7 +23,7 @@ func InitServer() {
 		routesV2.Health(healthV2)
 	}
 
-	err := router.Run(fmt.Sprintf("%s:%s", variables.Adress, variables.Port))
+	err := router.Run(fmt.Sprintf("%s:%s", variables.Address, variables.Port))
 	if err != nil {
 		panic(err)
 	}
