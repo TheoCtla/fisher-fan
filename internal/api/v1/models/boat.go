@@ -1,4 +1,4 @@
-package model
+package models
 
 type Boat struct {
 	ID     uint    `json:"id" gorm:"primaryKey"`

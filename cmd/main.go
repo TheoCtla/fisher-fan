@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fisherman/internal/api/v1/models"
 	"fisherman/internal/database"
 	"fisherman/internal/server"
 	"log"
@@ -9,12 +10,15 @@ import (
 func main() {
 	log.Println("🐟 Démarrage de FisherFan API...")
 
-	// Connexion à la base de données
-	if err := database.Connect(); err != nil {
-		log.Fatalf("❌ Impossible de se connecter à la base de données: %v", err)
+	// 1. Connexion
+	db, err := database.Connect()
+	if err != nil {
+		log.Fatalf("❌ Impossible de se connecter: %v", err)
 	}
-	defer database.Close()
 
-	// Démarrage du serveur
-	server.InitServer()
+	// 2. Auto-Migration (Optionnel mais recommandé ici)
+	db.AutoMigrate(&models.User{})
+
+	// 3. Lancement du serveur avec la DB injectée
+	server.InitServer(db)
 }

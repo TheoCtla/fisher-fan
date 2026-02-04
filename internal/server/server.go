@@ -8,21 +8,18 @@ import (
 	"fisherman/internal/variables"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
-func InitServer() {
+func InitServer(db *gorm.DB) {
 	router := gin.Default()
 	apiGroup := router.Group("/api")
 	v1 := apiGroup.Group("/v1")
 	v2 := apiGroup.Group("/v2")
 	{
-		healthV1 := v1.Group("/health")
-		boatV1 := v1.Group("/boats")
-		routesV1.Health(healthV1)
-		routesV1.RegisterBoatRoutes(boatV1)
-
-		healthV2 := v2.Group("/health")
-		routesV2.Health(healthV2)
+		routesV1.SetupRoutes(v1, db)
+		routesV1.Health(v1)
+		routesV2.Health(v2)
 	}
 
 	err := router.Run(fmt.Sprintf("%s:%s", variables.Address, variables.Port))

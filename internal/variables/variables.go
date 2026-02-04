@@ -3,6 +3,8 @@ package variables
 import (
 	"log"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 // Configuration du serveur
@@ -23,7 +25,9 @@ var (
 
 // getEnv récupère une variable d'environnement ou crash si absente
 func getEnv(key string) string {
+	godotenv.Load()
 	value, exists := os.LookupEnv(key)
+	log.Println("Loading env variable:", key, "Value:", value)
 	if !exists {
 		log.Fatalf("❌ Variable d'environnement requise non définie: %s", key)
 	}
