@@ -1,5 +1,7 @@
 package models
 
+import "time"
+
 type User struct {
 	ID string `gorm:"primaryKey;type:uuid;default:gen_random_uuid()" json:"id"`
 
@@ -7,6 +9,7 @@ type User struct {
 	FirstName   string `gorm:"not null" json:"firstName"`
 	BirthDate   string `gorm:"type:date" json:"birthDate"`
 	Email       string `gorm:"uniqueIndex;not null" json:"email"`
+	Password    string `gorm:"not null" json:"-"` // Hidden from JSON responses
 	BoatLicense string `gorm:"type:varchar(8)" json:"boatLicense"`
 	Status      string `gorm:"type:varchar(20);check:status IN ('individual', 'professional')" json:"status"`
 
@@ -14,6 +17,10 @@ type User struct {
 	ActivityType string `gorm:"type:varchar(20);check:activity_type IN ('rental', 'fishing guide', '')" json:"activityType"`
 	SiretNumber  string `gorm:"type:varchar(14)" json:"siretNumber"`
 	RcNumber     string `json:"rcNumber"`
+
+	RefreshToken string    `gorm:"type:text" json:"-"` // Hidden from JSON responses
+	CreatedAt    time.Time `gorm:"autoCreateTime" json:"createdAt"`
+	UpdatedAt    time.Time `gorm:"autoUpdateTime" json:"updatedAt"`
 
 	Boats        []Boat        `gorm:"foreignKey:UserID" json:"boats"`
 	Trips        []Trip        `gorm:"foreignKey:UserID" json:"trips"`
