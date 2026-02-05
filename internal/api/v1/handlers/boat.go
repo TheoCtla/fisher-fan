@@ -53,6 +53,8 @@ func (h *BoatHandler) GetBoatsByBBox(c *gin.Context) {
 
 func (h *BoatHandler) CreateBoat(c *gin.Context) {
 	var boat models.Boat
+	boat.ID = ""
+
 	if err := c.ShouldBindJSON(&boat); err != nil {
 		c.JSON(400, gin.H{"message": "Invalid data"})
 		return

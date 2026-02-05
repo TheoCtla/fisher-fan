@@ -3,6 +3,8 @@ package services
 import (
 	"fisherman/internal/api/v1/models"
 	"fisherman/internal/api/v1/repository"
+
+	"github.com/google/uuid"
 )
 
 type UserService struct {
@@ -22,8 +24,7 @@ func (s *UserService) GetAllUsers(lastName, firstName, email, status string) ([]
 
 // CreateUser gère la création d'un utilisateur
 func (s *UserService) CreateUser(user *models.User) error {
-	// Logique métier : par exemple, forcer les emails en minuscules
-	// ou vérifier si l'utilisateur est majeur.
+	user.ID = uuid.New().String()
 	return s.repo.Create(user)
 }
 

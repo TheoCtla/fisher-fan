@@ -3,6 +3,8 @@ package services
 import (
 	"fisherman/internal/api/v1/models"
 	"fisherman/internal/api/v1/repository"
+
+	"github.com/google/uuid"
 )
 
 type BoatService struct {
@@ -22,6 +24,7 @@ func (s *BoatService) GetBoatByID(id string) (*models.Boat, error) {
 }
 
 func (s *BoatService) CreateBoat(boat *models.Boat) error {
+	boat.ID = uuid.New().String()
 	return s.repo.Create(boat)
 }
 

@@ -35,7 +35,8 @@ CREATE TABLE "boats" (
 CREATE TABLE "boatEquipment" (
   "boat_id" varchar NOT NULL,
   "name" varchar NOT NULL,
-  PRIMARY KEY ("boat_id", "name")
+  PRIMARY KEY ("boat_id", "name"),
+  FOREIGN KEY ("boat_id") REFERENCES "boats" ("id") ON DELETE CASCADE
 );
 
 CREATE TABLE "trips" (

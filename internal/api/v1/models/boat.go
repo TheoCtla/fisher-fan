@@ -2,15 +2,10 @@ package models
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
 type Boat struct {
-	ID        string         `gorm:"primaryKey" json:"id"`
-	CreatedAt time.Time      `json:"-"`
-	UpdatedAt time.Time      `json:"-"`
-	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
+	ID string `gorm:"primaryKey;type:uuid;default:gen_random_uuid()" json:"id"`
 
 	UserID          string     `gorm:"column:user_id;not null" json:"userId"`
 	Name            string     `gorm:"not null" json:"name"`
@@ -29,10 +24,14 @@ type Boat struct {
 	EngineType      string     `gorm:"column:engine_type" json:"engineType"`
 	EnginePower     int        `gorm:"column:engine_power" json:"enginePower"`
 
-	Equipments []BoatEquipment `gorm:"foreignKey:BoatID" json:"equipment"`
+	Equipments []BoatEquipment `gorm:"foreignKey:BoatID;constraint:OnDelete:CASCADE" json:"equipment"`
 }
 
 type BoatEquipment struct {
 	BoatID string `gorm:"column:boat_id;primaryKey" json:"-"`
 	Name   string `gorm:"primaryKey" json:"name"`
+}
+
+func (BoatEquipment) TableName() string {
+	return "boatEquipment"
 }

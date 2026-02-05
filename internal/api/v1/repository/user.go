@@ -3,7 +3,6 @@ package repository
 import (
 	"fisherman/internal/api/v1/models"
 
-	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -18,7 +17,6 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 
 // Create insère un nouvel utilisateur en base
 func (repo *UserRepository) Create(user *models.User) error {
-	user.ID = uuid.New().String()
 	return repo.db.Create(user).Error
 }
 
