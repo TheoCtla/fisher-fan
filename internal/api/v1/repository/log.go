@@ -31,7 +31,7 @@ func (r *LogRepository) GetPage(pageID string) (*models.Page, error) {
 }
 
 func (r *LogRepository) UpdatePage(pageID string, page *models.Page) error {
-	return r.db.Model(&models.Page{}).Where("id = ?", pageID).Updates(page).Error
+	return r.db.Save(page).Error
 }
 
 func (r *LogRepository) DeletePage(pageID string) error {

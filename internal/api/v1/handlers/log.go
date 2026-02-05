@@ -60,17 +60,31 @@ func (h *LogHandler) GetPage(c *gin.Context) {
 }
 
 func (h *LogHandler) UpdatePage(c *gin.Context) {
-	pageId := c.Param("page_id")
+	userID := c.Param("id")
+	pageID := c.Param("page_id")
+
 	var page models.Page
 	if err := c.ShouldBindJSON(&page); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"message": "Data invalide"})
+		c.JSON(400, gin.H{"message": "Data invalide"})
 		return
 	}
-	if err := h.service.UpdatePage(pageId, &page); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"message": "Echec mise à jour"})
+
+	userLog, err := h.service.GetByUserID(userID)
+	if err != nil {
+		c.JSON(404, gin.H{"message": "Log introuvable, créez le d'abord"})
 		return
 	}
-	c.JSON(http.StatusOK, page)
+
+	page.ID = pageID
+	page.UserID = userID
+	page.LogID = userLog.ID
+
+	if err := h.service.UpdatePage(pageID, &page); err != nil {
+		c.JSON(500, gin.H{"message": "Erreur DB", "error": err.Error()})
+		return
+	}
+
+	c.JSON(200, page)
 }
 
 func (h *LogHandler) DeletePage(c *gin.Context) {
