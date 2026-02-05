@@ -1,62 +1,66 @@
 package handlers
 
 import (
+	"errors"
 	"net/http"
-	"strconv"
 
 	"fisherman/internal/api/v1/models"
 	"fisherman/internal/api/v1/services"
-
-	"errors"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
-// UserHandler structure qui contient le service nécessaire à la logique
 type UserHandler struct {
 	service *services.UserService
 }
 
-// NewUserHandler est le constructeur du handler (utilisé dans le main.go)
-func NewUserHandler(s *services.UserService) *UserHandler {
-	return &UserHandler{service: s}
+func NewUserHandler(service *services.UserService) *UserHandler {
+	return &UserHandler{service: service}
 }
 
-// CreateUser gère la route POST /users
-func (h *UserHandler) CreateUser(c *gin.Context) {
-	var user models.User
+// GetUsers gère GET /v1/users (avec filtres query)
+func (h *UserHandler) GetUsers(c *gin.Context) {
+	// Extraction des filtres depuis la query string
+	lastName := c.Query("lastName")
+	firstName := c.Query("firstName")
+	email := c.Query("email")
+	status := c.Query("status")
 
-	// 1. On tente de binder le JSON reçu vers notre struct
+	users, err := h.service.GetAllUsers(lastName, firstName, email, status)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la récupération des utilisateurs"})
+		return
+	}
+
+	c.JSON(http.StatusOK, users)
+}
+
+// CreateUser gère POST /v1/users
+func (h *UserHandler) CreateUser(c *gin.Context) {
+
+	var user models.User
+	user.ID = ""
+
 	if err := c.ShouldBindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Format JSON invalide: " + err.Error()})
 		return
 	}
 
-	// 2. On appelle le service pour la création
 	if err := h.service.CreateUser(&user); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la création de l'utilisateur"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la création"})
 		return
 	}
 
-	// 3. Succès
 	c.JSON(http.StatusCreated, user)
 }
 
-// GetUser gère la route GET /users/:id
+// GetUser gère GET /v1/users/:userId
 func (h *UserHandler) GetUser(c *gin.Context) {
-	// 1. On récupère l'ID dans l'URL et on le convertit en int
-	idParam := c.Param("id")
-	id, err := strconv.ParseUint(idParam, 10, 32)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "ID invalide, doit être un nombre"})
-		return
-	}
+	idParam := c.Param("id") // Correspond au nom dans tes routes Gin
 
-	// 2. On appelle le service
-	user, err := h.service.GetUser(uint(id))
+	user, err := h.service.GetUser(idParam)
 	if err != nil {
-		// On vérifie si c'est une erreur "pas trouvé" ou une erreur serveur
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			c.JSON(http.StatusNotFound, gin.H{"error": "Utilisateur non trouvé"})
 		} else {
@@ -65,6 +69,43 @@ func (h *UserHandler) GetUser(c *gin.Context) {
 		return
 	}
 
-	// 3. On renvoie l'utilisateur trouvé
 	c.JSON(http.StatusOK, user)
+}
+
+// UpdateUser gère PUT /v1/users/:id
+func (h *UserHandler) UpdateUser(c *gin.Context) {
+	idParam := c.Param("id")
+
+	var userUpdate models.User
+	if err := c.ShouldBindJSON(&userUpdate); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Données invalides"})
+		return
+	}
+
+	// On s'assure que l'ID de l'URL est bien celui appliqué à l'objet
+	userUpdate.ID = idParam
+
+	updatedUser, err := h.service.UpdateUser(&userUpdate)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Utilisateur non trouvé"})
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la mise à jour"})
+		}
+		return
+	}
+
+	c.JSON(http.StatusOK, updatedUser)
+}
+
+// DeleteUser gère DELETE /v1/users/:id
+func (h *UserHandler) DeleteUser(c *gin.Context) {
+	idParam := c.Param("id")
+
+	if err := h.service.DeleteUser(idParam); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la suppression"})
+		return
+	}
+
+	c.Status(http.StatusNoContent)
 }

@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func SetupRoutes(router *gin.RouterGroup, database *gorm.DB) {
+func SetupUserRoutes(router *gin.RouterGroup, database *gorm.DB) {
 	// 1. On crée le repository avec la DB
 	repo := repository.NewUserRepository(database)
 
@@ -21,5 +21,8 @@ func SetupRoutes(router *gin.RouterGroup, database *gorm.DB) {
 
 	// 4. On dit à Gin : "Quand quelqu'un appelle POST /users, utilise la méthode du handler handler"
 	router.POST("/users", handler.CreateUser)
+	router.GET("/users", handler.GetUsers)
 	router.GET("/users/:id", handler.GetUser)
+	router.PUT("/users/:id", handler.UpdateUser)
+	router.DELETE("/users/:id", handler.DeleteUser)
 }

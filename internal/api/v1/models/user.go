@@ -7,15 +7,25 @@ import (
 )
 
 type User struct {
-	gorm.Model             // Contient déjà ID (uint), CreatedAt, UpdatedAt, DeletedAt
-	LastName     string    `json:"lastName"`
-	FirstName    string    `json:"firstName"`
-	BirthDate    time.Time `json:"birthDate"`
-	Email        string    `json:"email" gorm:"unique;not null"`
-	BoatLicense  string    `json:"boatLicense"`
-	Status       string    `json:"status"` // individual, professional
-	CompanyName  string    `json:"companyName,omitempty"`
-	ActivityType string    `json:"activityType,omitempty"`
-	SiretNumber  string    `json:"siretNumber,omitempty"`
-	RCNumber     string    `json:"rcNumber,omitempty"`
+	ID        string         `gorm:"primaryKey;type:uuid;default:gen_random_uuid()" json:"id"`
+	CreatedAt time.Time      `json:"-"`
+	UpdatedAt time.Time      `json:"-"`
+	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
+
+	LastName    string `gorm:"not null" json:"lastName"`
+	FirstName   string `gorm:"not null" json:"firstName"`
+	BirthDate   string `gorm:"type:date" json:"birthDate"`
+	Email       string `gorm:"uniqueIndex;not null" json:"email"`
+	BoatLicense string `gorm:"type:varchar(8)" json:"boatLicense"`
+	Status      string `gorm:"type:varchar(20);check:status IN ('individual', 'professional')" json:"status"`
+
+	CompanyName  string `json:"companyName"`
+	ActivityType string `gorm:"type:varchar(20);check:activity_type IN ('rental', 'fishing guide', '')" json:"activityType"`
+	SiretNumber  string `gorm:"type:varchar(14)" json:"siretNumber"`
+	RcNumber     string `json:"rcNumber"`
+
+	Boats        []Boat        `gorm:"foreignKey:UserID" json:"boats"`
+	Trips        []Trip        `gorm:"foreignKey:UserID" json:"trips"`
+	Reservations []Reservation `gorm:"foreignKey:UserID" json:"reservations"`
+	Log          *Log          `gorm:"foreignKey:UserID" json:"log"`
 }

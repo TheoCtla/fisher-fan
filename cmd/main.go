@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fisherman/internal/api/v1/models"
 	"fisherman/internal/database"
 	"fisherman/internal/server"
 	"log"
@@ -17,7 +16,7 @@ func main() {
 	}
 
 	// 2. Auto-Migration (Optionnel mais recommandé ici)
-	db.AutoMigrate(&models.User{})
+	// db.AutoMigrate(&models.User{})
 
 	// 3. Lancement du serveur avec la DB injectée
 	server.InitServer(db)

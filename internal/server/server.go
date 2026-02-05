@@ -17,7 +17,8 @@ func InitServer(db *gorm.DB) {
 	v1 := apiGroup.Group("/v1")
 	v2 := apiGroup.Group("/v2")
 	{
-		routesV1.SetupRoutes(v1, db)
+		routesV1.SetupUserRoutes(v1, db)
+		routesV1.SetupBoatRoutes(v1, db)
 		routesV1.Health(v1)
 		routesV2.Health(v2)
 	}
