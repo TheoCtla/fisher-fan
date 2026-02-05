@@ -3,7 +3,7 @@ package models
 import "time"
 
 type Trip struct {
-	ID             string  `gorm:"primaryKey" json:"id"`
+	ID             string  `gorm:"primaryKey;type:uuid;default:gen_random_uuid()" json:"id"`
 	UserID         string  `gorm:"column:user_id;not null" json:"userId"`
 	BoatID         string  `gorm:"column:boat_id;not null" json:"boatId"`
 	Title          string  `gorm:"not null" json:"title"`
@@ -22,4 +22,8 @@ type TripSchedule struct {
 	EndDate       *time.Time `gorm:"column:end_date" json:"endDate"`
 	DepartureTime string     `gorm:"column:departure_time;primaryKey" json:"departureTime"` // Format HH:MM:SS
 	EndTime       string     `gorm:"column:end_time" json:"endTime"`
+}
+
+func (TripSchedule) TableName() string {
+	return "tripSchedules"
 }

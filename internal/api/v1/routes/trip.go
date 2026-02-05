@@ -15,11 +15,8 @@ func SetupTripRoutes(router *gin.RouterGroup, db *gorm.DB) {
 	handler := handlers.NewTripHandler(service)
 
 	router.POST("/trips", handler.CreateTrip)
-
-	// router.POST("/boats", handler.CreateBoat)
-	// router.GET("/boats", handler.GetBoats)
-	// router.GET("/boats/:id", handler.GetBoatByID)
-	// router.PUT("/boats/:id", handler.UpdateBoat)
-	// router.DELETE("/boats/:id", handler.DeleteBoat)
-	// router.GET("/boats/bbox", handler.GetBoatsByBBox)
+	router.GET("/trips", handler.GetTrips)
+	router.GET("/trips/:id", handler.GetTripByID)
+	router.PUT("/trips/:id", handler.UpdateTrip)
+	router.DELETE("/trips/:id", handler.DeleteTrip)
 }

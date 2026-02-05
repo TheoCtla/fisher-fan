@@ -88,22 +88,22 @@ CREATE TABLE "pages" (
   "release" boolean
 );
 
-ALTER TABLE "boats" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "boats" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "boatEquipment" ADD FOREIGN KEY ("boat_id") REFERENCES "boats" ("id");
+ALTER TABLE "boatEquipment" ADD FOREIGN KEY ("boat_id") REFERENCES "boats" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "trips" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "trips" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "trips" ADD FOREIGN KEY ("boat_id") REFERENCES "boats" ("id");
+ALTER TABLE "trips" ADD FOREIGN KEY ("boat_id") REFERENCES "boats" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "tripSchedules" ADD FOREIGN KEY ("trip_id") REFERENCES "trips" ("id");
+ALTER TABLE "tripSchedules" ADD FOREIGN KEY ("trip_id") REFERENCES "trips" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "reservations" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "reservations" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "reservations" ADD FOREIGN KEY ("trip_id") REFERENCES "trips" ("id");
+ALTER TABLE "reservations" ADD FOREIGN KEY ("trip_id") REFERENCES "trips" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "logs" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "logs" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "pages" ADD FOREIGN KEY ("log_id") REFERENCES "logs" ("id");
+ALTER TABLE "pages" ADD FOREIGN KEY ("log_id") REFERENCES "logs" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "pages" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "pages" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
