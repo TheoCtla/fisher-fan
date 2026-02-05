@@ -2,7 +2,7 @@ CREATE TABLE "users" (
   "id" varchar PRIMARY KEY NOT NULL,
   "last_name" varchar NOT NULL,
   "first_name" varchar NOT NULL,
-  "birth_bate" date,
+  "birth_date" date,
   "email" varchar UNIQUE NOT NULL,
   "boat_license" varchar(8),
   "status" varchar NOT NULL,
