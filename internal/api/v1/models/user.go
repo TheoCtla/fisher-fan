@@ -1,16 +1,7 @@
 package models
 
-import (
-	"time"
-
-	"gorm.io/gorm"
-)
-
 type User struct {
-	ID        string         `gorm:"primaryKey;type:uuid;default:gen_random_uuid()" json:"id"`
-	CreatedAt time.Time      `json:"-"`
-	UpdatedAt time.Time      `json:"-"`
-	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
+	ID string `gorm:"primaryKey;type:uuid;default:gen_random_uuid()" json:"id"`
 
 	LastName    string `gorm:"not null" json:"lastName"`
 	FirstName   string `gorm:"not null" json:"firstName"`
