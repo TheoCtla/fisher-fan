@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "4f1a82e9-a2fa-4d20-9798-5468f0517faf",
+		"name": "CRUD python",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19328323"
+	},
+	"item": [
+		{
+			"name": "post article",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "        {\r\n            \"title\": \"titre cool\",\r\n            \"slug\": \"cest-mon-slug\",\r\n            \"content\": \"voici un contenu cool\",\r\n            \"author\": \"c'est moi\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1/Articles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"Articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get article id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tittle",
+							"value": "1er article",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "pouet",
+							"type": "text"
+						},
+						{
+							"key": "slug",
+							"value": "mon-premier-article",
+							"type": "text"
+						},
+						{
+							"key": "author",
+							"value": "moi",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1/Articles?page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"Articles"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put article",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"article_id\": null,\r\n    \"title\": \"mon article modifié\",\r\n    \"slug\": \"mon-slug-modifie\",\r\n    \"content\": \"nouveau contenu modifier\",\r\n    \"author\": \"nouveau moi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1/Articles/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"Articles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete article",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1/Articles/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"Articles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1/Articles/search?title=titre-cool&slug=cest-mon-slug",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"Articles",
+						"search"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "titre-cool"
+						},
+						{
+							"key": "slug",
+							"value": "cest-mon-slug"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
