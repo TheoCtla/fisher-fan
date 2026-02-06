@@ -1,8 +1,8 @@
 package services
 
 import (
-	"fisherman/internal/api/v1/models"
-	"fisherman/internal/api/v1/repository"
+	"fisherfan/internal/api/v1/models"
+	"fisherfan/internal/api/v1/repository"
 
 	"github.com/google/uuid"
 )

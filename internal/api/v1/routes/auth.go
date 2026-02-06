@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"fisherman/internal/api/v1/handlers"
-	"fisherman/internal/api/v1/middleware"
+	"fisherfan/internal/api/v1/handlers"
+	"fisherfan/internal/api/v1/middleware"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"

@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"fisherman/internal/api/v1/models"
+	"fisherfan/internal/api/v1/models"
 
 	"gorm.io/gorm"
 )

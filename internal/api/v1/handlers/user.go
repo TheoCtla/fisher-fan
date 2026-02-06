@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"fisherman/internal/api/v1/models"
-	"fisherman/internal/api/v1/services"
+	"fisherfan/internal/api/v1/models"
+	"fisherfan/internal/api/v1/services"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"

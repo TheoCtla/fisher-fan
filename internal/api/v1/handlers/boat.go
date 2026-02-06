@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"fisherman/internal/api/v1/models"
-	"fisherman/internal/api/v1/services"
+	"fisherfan/internal/api/v1/models"
+	"fisherfan/internal/api/v1/services"
 	"strconv"
 
 	"github.com/gin-gonic/gin"

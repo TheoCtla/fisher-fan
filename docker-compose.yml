@@ -2,10 +2,10 @@ services:
   api:
     build: .
     container_name: fisherfan-api
-    ports:
-      - "8080:8080"
     env_file:
       - .env
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
     depends_on:
       postgres:
         condition: service_healthy
@@ -18,7 +18,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:${DB_PORT}"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./migrations:/docker-entrypoint-initdb.d
@@ -33,7 +33,7 @@ services:
     container_name: fisherfan-adminer
     restart: always
     ports:
-      - "8081:8080"
+      - "8080:8080"
     depends_on:
       - postgres
 

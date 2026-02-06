@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"errors"
-	"fisherman/internal/api/v1/models"
-	"fisherman/internal/api/v1/repository"
-	"fisherman/internal/api/v1/services"
+	"fisherfan/internal/api/v1/models"
+	"fisherfan/internal/api/v1/repository"
+	"fisherfan/internal/api/v1/services"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

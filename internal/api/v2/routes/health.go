@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"fisherman/internal/api/v2/handlers"
+	"fisherfan/internal/api/v2/handlers"
 
 	"github.com/gin-gonic/gin"
 )

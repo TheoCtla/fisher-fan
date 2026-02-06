@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"fisherman/internal/api/v1/services"
+	"fisherfan/internal/api/v1/services"
 	"net/http"
 	"strings"
 

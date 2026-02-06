@@ -4,51 +4,78 @@ import (
 	"log"
 	"os"
 
+	// On enlève le "autoload" pour charger manuellement et voir les erreurs
 	"github.com/joho/godotenv"
 )
 
-// Configuration du serveur
-var (
-	Address = getEnv("SERVER_ADDRESS")
-	Port    = getEnv("SERVER_PORT")
-)
+var GlobalConfig *Config
 
-// Configuration JWT
-var (
-	JWTSecret          = getEnv("JWT_SECRET")
-	AccessTokenExpiry  = getEnvWithDefault("ACCESS_TOKEN_EXPIRY", "24h")
-	RefreshTokenExpiry = getEnvWithDefault("REFRESH_TOKEN_EXPIRY", "168h")
-)
-
-// Configuration de la base de données PostgreSQL
-var (
-	DBHost     = getEnv("DB_HOST")
-	DBPort     = getEnv("DB_PORT")
-	DBUser     = getEnv("DB_USER")
-	DBPassword = getEnv("DB_PASSWORD")
-	DBName     = getEnv("DB_NAME")
-	DBSSLMode  = getEnv("DB_SSLMODE")
-)
-
-// getEnv récupère une variable d'environnement ou crash si absente
-func getEnv(key string) string {
-	godotenv.Load()
-	value, exists := os.LookupEnv(key)
-	log.Println("Loading env variable:", key, "Value:", value)
-	if !exists {
-		log.Fatalf("❌ Variable d'environnement requise non définie: %s", key)
-	}
-	return value
+type Config struct {
+	ServerAddress string
+	ServerPort    string
+	DB            PostgresConfig
+	JWT           JWTConfig
 }
 
-// getEnvWithDefault récupère une variable d'environnement ou retourne une valeur par défaut
-func getEnvWithDefault(key, defaultValue string) string {
-	godotenv.Load()
-	value, exists := os.LookupEnv(key)
-	if !exists || value == "" {
-		log.Printf("⚠️  Variable d'environnement '%s' non définie, utilisation de la valeur par défaut: %s", key, defaultValue)
-		return defaultValue
+type PostgresConfig struct {
+	Host     string
+	Port     string
+	User     string
+	Password string
+	Name     string
+	SSLMode  string
+}
+
+type JWTConfig struct {
+	Secret             string
+	AccessTokenExpiry  string
+	RefreshTokenExpiry string
+}
+
+func init() {
+	// 1. On affiche le dossier où Go s'exécute pour vérifier qu'on est au bon endroit
+	cwd, _ := os.Getwd()
+	log.Println("📂 Dossier d'exécution (CWD) :", cwd)
+
+	// 2. On essaie de charger le .env explicitement
+	err := godotenv.Load()
+	if err != nil {
+		// On affiche l'erreur exacte (ex: fichier introuvable, problème de format...)
+		log.Printf("⚠️  ATTENTION: Impossible de charger le fichier .env : %v", err)
+		log.Println("ℹ️  Lecture des variables système uniquement...")
+	} else {
+		log.Println("✅ Fichier .env trouvé et chargé !")
 	}
-	log.Println("Loading env variable:", key, "Value:", value)
-	return value
+
+	log.Println("⚙️  Chargement de la configuration globale...")
+	GlobalConfig = loadConfig()
+}
+
+func loadConfig() *Config {
+	mustGetEnv := func(key string) string {
+		val := os.Getenv(key)
+		if val == "" {
+			// On arrête tout ici si c'est vide
+			log.Fatalf("❌ Erreur critique : La variable '%s' est vide ou manquante.", key)
+		}
+		return val
+	}
+
+	return &Config{
+		ServerAddress: mustGetEnv("SERVER_ADDRESS"),
+		ServerPort:    mustGetEnv("SERVER_PORT"),
+		DB: PostgresConfig{
+			Host:     mustGetEnv("DB_HOST"),
+			Port:     mustGetEnv("DB_PORT"),
+			User:     mustGetEnv("DB_USER"),
+			Password: mustGetEnv("DB_PASSWORD"),
+			Name:     mustGetEnv("DB_NAME"),
+			SSLMode:  os.Getenv("DB_SSLMODE"),
+		},
+		JWT: JWTConfig{
+			Secret:             mustGetEnv("JWT_SECRET"),
+			AccessTokenExpiry:  os.Getenv("ACCESS_TOKEN_EXPIRY"),
+			RefreshTokenExpiry: os.Getenv("REFRESH_TOKEN_EXPIRY"),
+		},
+	}
 }

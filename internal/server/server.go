@@ -3,9 +3,9 @@ package server
 import (
 	"fmt"
 
-	routesV1 "fisherman/internal/api/v1/routes"
-	routesV2 "fisherman/internal/api/v2/routes"
-	"fisherman/internal/variables"
+	routesV1 "fisherfan/internal/api/v1/routes"
+	routesV2 "fisherfan/internal/api/v2/routes"
+	"fisherfan/internal/variables"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -34,7 +34,7 @@ func InitServer(db *gorm.DB) {
 		routesV2.Health(v2)
 	}
 
-	err := router.Run(fmt.Sprintf("%s:%s", variables.Address, variables.Port))
+	err := router.Run(fmt.Sprintf("%s:%s", variables.GlobalConfig.ServerAddress, variables.GlobalConfig.ServerPort))
 	if err != nil {
 		panic(err)
 	}

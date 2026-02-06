@@ -4,7 +4,7 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"errors"
-	"fisherman/internal/variables"
+	"fisherfan/internal/variables"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -36,7 +36,7 @@ func (s *AuthService) VerifyPassword(hashedPassword, password string) error {
 // GenerateAccessToken génère un JWT access token
 func (s *AuthService) GenerateAccessToken(userID, email string) (string, error) {
 	// Parse la durée d'expiration
-	duration, err := time.ParseDuration(variables.AccessTokenExpiry)
+	duration, err := time.ParseDuration(variables.GlobalConfig.JWT.AccessTokenExpiry)
 	if err != nil {
 		duration = 24 * time.Hour // Fallback à 24h
 	}
@@ -53,7 +53,7 @@ func (s *AuthService) GenerateAccessToken(userID, email string) (string, error) 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	// Signer le token avec le secret
-	tokenString, err := token.SignedString([]byte(variables.JWTSecret))
+	tokenString, err := token.SignedString([]byte(variables.GlobalConfig.JWT.Secret))
 	if err != nil {
 		return "", err
 	}
@@ -78,7 +78,7 @@ func (s *AuthService) ValidateToken(tokenString string) (*jwt.MapClaims, error) 
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("méthode de signature invalide")
 		}
-		return []byte(variables.JWTSecret), nil
+		return []byte(variables.GlobalConfig.JWT.Secret), nil
 	})
 
 	if err != nil {

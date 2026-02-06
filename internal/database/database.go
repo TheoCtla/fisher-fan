@@ -1,7 +1,7 @@
 package database
 
 import (
-	"fisherman/internal/variables"
+	"fisherfan/internal/variables"
 	"fmt"
 	"log"
 
@@ -13,8 +13,8 @@ import (
 func Connect() (*gorm.DB, error) {
 	dsn := fmt.Sprintf(
 		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-		variables.DBHost, variables.DBPort, variables.DBUser,
-		variables.DBPassword, variables.DBName, variables.DBSSLMode,
+		variables.GlobalConfig.DB.Host, variables.GlobalConfig.DB.Port, variables.GlobalConfig.DB.User,
+		variables.GlobalConfig.DB.Password, variables.GlobalConfig.DB.Name, variables.GlobalConfig.DB.SSLMode,
 	)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
