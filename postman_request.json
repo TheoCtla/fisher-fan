@@ -1,0 +1,1010 @@
+{
+  "info": {
+    "_postman_id": "b02751d6-36b2-4d18-8527-9ec9d1189212",
+    "name": "fisherman",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19328323"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "user",
+          "item": [
+            {
+              "name": "get users",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/users",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "post pro user",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"lastName\": \"Dupont\",\r\n  \"firstName\": \"Jean\",\r\n  \"birthDate\": \"1985-06-15\",\r\n  \"email\": \"jean.dupont@example.com\",\r\n  \"boatLicense\": \"12345678\",\r\n  \"status\": \"professional\",\r\n  \"companyName\": \"L'Aventure Marine\",\r\n  \"activityType\": \"fishing guide\",\r\n  \"siretNumber\": \"12345678901234\",\r\n  \"rcNumber\": \"RC-MARSEILLE-5678\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/users",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "post normal user",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"lastName\": \"Dupont\",\r\n    \"firstName\": \"Jean\",\r\n    \"birthDate\": \"1992-05-20\",\r\n    \"email\": \"jean.dupont12@exemple.com\",\r\n    \"boatLicense\": \"87654321\",\r\n    \"status\": \"individual\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/users",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get filtred user",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/users?status=professional&lastName=dupont",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "professional"
+                    },
+                    {
+                      "key": "lastName",
+                      "value": "dupont"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get user by id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/users/17",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "17"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "modify user",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"lastName\": \"Dupont-Modifié\",\r\n    \"firstName\": \"Jean\",\r\n    \"birthDate\": \"1992-05-20\",\r\n    \"email\": \"jean.updated1@exemple.com\",\r\n    \"boatLicense\": \"00000000\",\r\n    \"status\": \"individual\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/users/99bb32c5-f63e-4e18-a782-9471fd95ad22",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "99bb32c5-f63e-4e18-a782-9471fd95ad22"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete users",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/users/99bb32c5-f63e-4e18-a782-9471fd95ad22",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "99bb32c5-f63e-4e18-a782-9471fd95ad22"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "health",
+          "item": [
+            {
+              "name": "health check v1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Mon premier post\",\r\n  \"content\": \"Ceci est le contenu du post.\",\r\n  \"author\": \"Charles\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "boats",
+          "item": [
+            {
+              "name": "Create a Boat",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"8c0a90e4-c98f-4bf3-ab01-edacc32aa9e2\",\n  \"name\": \"L'Espadon\",\n  \"description\": \"Superbe bateau pour la pêche au gros en Méditerranée.\",\n  \"brand\": \"Beneteau\",\n  \"manufactureYear\": \"2022-05-20T00:00:00Z\",\n  \"photoUrl\": \"https://images.example.com/boats/espadon.jpg\",\n  \"licenseType\": \"coastal\",\n  \"boatType\": \"open\",\n  \"equipment\": [\n    {\"name\": \"sonar\"},\n    {\"name\": \"rod holders\"},\n    {\"name\": \"GPS\"},\n    {\"name\": \"VHF radio\"}\n  ],\n  \"depositAmount\": 2500.0,\n  \"maxCapacity\": 8,\n  \"numberOfBeds\": 2,\n  \"homePort\": \"Marseille\",\n  \"latitude\": 43.2965,\n  \"longitude\": 5.3698,\n  \"engineType\": \"gasoline\",\n  \"enginePower\": 250\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/boats",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "boats"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Boats (with filters)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/boats?brand=Beneteau&boatType=open&name=Espadon",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "boats"
+                  ],
+                  "query": [
+                    {
+                      "key": "brand",
+                      "value": "Beneteau",
+                      "id": 0
+                    },
+                    {
+                      "key": "boatType",
+                      "value": "open",
+                      "id": 1
+                    },
+                    {
+                      "key": "name",
+                      "value": "Espadon",
+                      "id": 2
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Boats by Bounding Box (Query)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/boats?y1=43.0&y2=44.0&x1=5.0&x2=6.0",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "boats"
+                  ],
+                  "query": [
+                    {
+                      "key": "y1",
+                      "value": "43.0"
+                    },
+                    {
+                      "key": "y2",
+                      "value": "44.0"
+                    },
+                    {
+                      "key": "x1",
+                      "value": "5.0"
+                    },
+                    {
+                      "key": "x2",
+                      "value": "6.0"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Boats by BBox (Dedicated Route)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/boats/bbox?lat_min=43.0&lat_max=44.0&lon_min=5.0&lon_max=6.0",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "boats",
+                    "bbox"
+                  ],
+                  "query": [
+                    {
+                      "key": "lat_min",
+                      "value": "43.0"
+                    },
+                    {
+                      "key": "lat_max",
+                      "value": "44.0"
+                    },
+                    {
+                      "key": "lon_min",
+                      "value": "5.0"
+                    },
+                    {
+                      "key": "lon_max",
+                      "value": "6.0"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Boat by ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/boats/fb191c51-c470-454b-bb08-48ad0535bc1e",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "boats",
+                    "fb191c51-c470-454b-bb08-48ad0535bc1e"
+                  ],
+                  "variable": [
+                    {
+                      "value": "ID_ICI",
+                      "key": "id"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Boat",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"L'Espadon v2\",\n    \"maxCapacity\": 8\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/boats/fb191c51-c470-454b-bb08-48ad0535bc1e",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "boats",
+                    "fb191c51-c470-454b-bb08-48ad0535bc1e"
+                  ],
+                  "variable": [
+                    {
+                      "value": "ID_ICI",
+                      "key": "id"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Boat",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/boats/fb191c51-c470-454b-bb08-48ad0535bc1e",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "boats",
+                    "fb191c51-c470-454b-bb08-48ad0535bc1e"
+                  ],
+                  "variable": [
+                    {
+                      "value": "ID_ICI",
+                      "key": "id"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "trip",
+          "item": [
+            {
+              "name": "add trip",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"userId\": \"8c0a90e4-c98f-4bf3-ab01-edacc32aa9e2\",\r\n  \"boatId\": \"7a6145e3-b219-4076-b13d-061a44e751d8\",\r\n  \"title\": \"Pêche au Thon au large des Calanques\",\r\n  \"practicalInfo\": \"Prévoir de la crème solaire et des vêtements de rechange. Matériel de pêche fourni.\",\r\n  \"tripType\": \"daily\",\r\n  \"rateType\": \"per person\",\r\n  \"passengerCount\": 4,\r\n  \"price\": 120.0,\r\n  \"schedules\": [\r\n    {\r\n      \"startDate\": \"2026-06-15T00:00:00Z\",\r\n      \"endDate\": \"2026-06-15T00:00:00Z\",\r\n      \"departureTime\": \"08:00:00\",\r\n      \"endTime\": \"17:00:00\"\r\n    }\r\n  ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/trips/",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "trips",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get trips",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/trips",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "trips"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get filtred trips",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/trips?title=Pêche",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "trips"
+                  ],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "Pêche"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "modify trip",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"new title\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/trips/633b2771-0302-4471-9811-3968efb04afe",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "trips",
+                    "633b2771-0302-4471-9811-3968efb04afe"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get trip by id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/trips/633b2771-0302-4471-9811-3968efb04afe",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "trips",
+                    "633b2771-0302-4471-9811-3968efb04afe"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete trip",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/trips/633b2771-0302-4471-9811-3968efb04afe",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "trips",
+                    "633b2771-0302-4471-9811-3968efb04afe"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "reservation",
+          "item": [
+            {
+              "name": "get reservations",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/reservations",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "reservations"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "post reservation",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"tripId\": \"1\",\r\n  \"userId\": \"1\",\r\n  \"date\": \"2026-06-15T08:00:00Z\",\r\n  \"reservedSeats\": 2,\r\n  \"totalPrice\": 240.0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/reservations",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "reservations"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get filtred reservation",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/reservations?userId=1",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "reservations"
+                  ],
+                  "query": [
+                    {
+                      "key": "userId",
+                      "value": "1",
+                      "type": "text",
+                      "id": 0
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "modify reservation",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"reservedSeats\": 3\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/reservations/1",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "reservations",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get reservation by id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/reservations/1",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "reservations",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete reservation",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/reservations/eba6e297-6f84-4e20-9ce5-0ff50dabb8e5",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "reservations",
+                    "eba6e297-6f84-4e20-9ce5-0ff50dabb8e5"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "log",
+          "item": [
+            {
+              "name": "get log",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/log/1",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "log",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "init log",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/log/1",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "log",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "create page",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"fishName\": \"Brochet\",\r\n    \"fishPhotoUrl\": \"https://mon-image.com/brochet.jpg\",\r\n    \"comment\": \"Un combat mémorable !\",\r\n    \"length\": 85.5,\r\n    \"weight\": 5.2,\r\n    \"fishingSpot\": \"Lac d'Annecy\",\r\n    \"fishingDate\": \"2026-02-05T00:00:00Z\",\r\n    \"release\": true\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/log/1/pages/1",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "log",
+                    "1",
+                    "pages",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get pages for user",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v1/log/1/pages/1",
+                  "protocol": "http",
+                  "host": [
+                    "{{SERVER_ADDRESS}}"
+                  ],
+                  "port": "{{SERVER_PORT}}",
+                  "path": [
+                    "api",
+                    "v1",
+                    "log",
+                    "1",
+                    "pages",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "health check v2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Mon premier post\",\r\n  \"content\": \"Ceci est le contenu du post.\",\r\n  \"author\": \"Charles\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{SERVER_ADDRESS}}:{{SERVER_PORT}}/api/v2/",
+              "protocol": "http",
+              "host": [
+                "{{SERVER_ADDRESS}}"
+              ],
+              "port": "{{SERVER_PORT}}",
+              "path": [
+                "api",
+                "v2",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
