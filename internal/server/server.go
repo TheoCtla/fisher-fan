@@ -26,6 +26,8 @@ func InitServer(db *gorm.DB) {
 		// Autres routes
 		routesV1.SetupBoatRoutes(v1, db)
 		routesV1.SetupTripRoutes(v1, db)
+		routesV1.SetupReservationRoutes(v1, db)
+		routesV1.SetupLogRoutes(v1, db)
 
 		// Health checks
 		routesV1.Health(v1)

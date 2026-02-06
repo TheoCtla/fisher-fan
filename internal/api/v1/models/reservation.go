@@ -3,7 +3,7 @@ package models
 import "time"
 
 type Reservation struct {
-	ID            string    `gorm:"primaryKey" json:"id"`
+	ID            string    `gorm:"primaryKey;type:uuid;default:gen_random_uuid()" json:"id"`
 	TripID        string    `gorm:"column:trip_id;not null" json:"tripId"`
 	UserID        string    `gorm:"column:user_id;not null" json:"userId"`
 	Date          time.Time `gorm:"not null" json:"date"`
