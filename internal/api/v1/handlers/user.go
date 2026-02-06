@@ -39,20 +39,23 @@ func (h *UserHandler) GetUsers(c *gin.Context) {
 // CreateUser gère POST /v1/users
 func (h *UserHandler) CreateUser(c *gin.Context) {
 
-	var user models.User
-	user.ID = ""
+	c.JSON(http.StatusBadRequest, gin.H{"error": "L'utilisation de cette route est déconseillée. Veuillez utiliser /auth/register à la place."})
+	return
 
-	if err := c.ShouldBindJSON(&user); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Format JSON invalide: " + err.Error()})
-		return
-	}
+	// var user models.User
+	// user.ID = ""
 
-	if err := h.service.CreateUser(&user); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la création"})
-		return
-	}
+	// if err := c.ShouldBindJSON(&user); err != nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Format JSON invalide: " + err.Error()})
+	// 	return
+	// }
 
-	c.JSON(http.StatusCreated, user)
+	// if err := h.service.CreateUser(&user); err != nil {
+	// 	c.JSON(http.StatusInternalServerError, gin.H{"error": "Erreur lors de la création"})
+	// 	return
+	// }
+
+	// c.JSON(http.StatusCreated, user)
 }
 
 // GetUser gère GET /v1/users/:userId
