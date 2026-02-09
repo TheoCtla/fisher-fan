@@ -11,7 +11,9 @@ import (
 
 func SetupBoatRoutes(router *gin.RouterGroup, db *gorm.DB) {
 	repo := repository.NewBoatRepository(db)
-	service := services.NewBoatService(repo)
+	userRepo := repository.NewUserRepository(db)
+
+	service := services.NewBoatService(repo, userRepo)
 	handler := handlers.NewBoatHandler(service)
 
 	router.POST("/boats", handler.CreateBoat)

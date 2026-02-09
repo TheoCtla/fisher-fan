@@ -45,7 +45,7 @@ func (h *BoatHandler) GetBoatsByBBox(c *gin.Context) {
 
 	boats, err := h.service.GetByBBox(latMin, latMax, lonMin, lonMax)
 	if err != nil {
-		c.JSON(500, gin.H{"error": err.Error()})
+		c.JSON(500, gin.H{"message": "Could not retrieve boats by bounding box", "error": err.Error()})
 		return
 	}
 	c.JSON(200, boats)
@@ -56,11 +56,11 @@ func (h *BoatHandler) CreateBoat(c *gin.Context) {
 	boat.ID = ""
 
 	if err := c.ShouldBindJSON(&boat); err != nil {
-		c.JSON(400, gin.H{"message": "Invalid data"})
+		c.JSON(400, gin.H{"message": "Invalid data", "error": err.Error()})
 		return
 	}
 	if err := h.service.CreateBoat(&boat); err != nil {
-		c.JSON(422, gin.H{"message": "Could not create boat"})
+		c.JSON(422, gin.H{"message": "Could not create boat", "error": err.Error()})
 		return
 	}
 	c.JSON(201, boat)
@@ -70,7 +70,7 @@ func (h *BoatHandler) GetBoatByID(c *gin.Context) {
 	id := c.Param("id")
 	boat, err := h.service.GetBoatByID(id)
 	if err != nil {
-		c.JSON(404, gin.H{"message": "Boat not found"})
+		c.JSON(404, gin.H{"message": "Boat not found", "error": err.Error()})
 		return
 	}
 	c.JSON(200, boat)
@@ -80,11 +80,11 @@ func (h *BoatHandler) UpdateBoat(c *gin.Context) {
 	id := c.Param("id")
 	var boat models.Boat
 	if err := c.ShouldBindJSON(&boat); err != nil {
-		c.JSON(400, gin.H{"message": "Invalid data"})
+		c.JSON(400, gin.H{"message": "Invalid data", "error": err.Error()})
 		return
 	}
 	if err := h.service.UpdateBoat(id, &boat); err != nil {
-		c.JSON(500, gin.H{"message": "Update failed"})
+		c.JSON(500, gin.H{"message": "Update failed", "error": err.Error()})
 		return
 	}
 	c.JSON(200, boat)
@@ -93,7 +93,7 @@ func (h *BoatHandler) UpdateBoat(c *gin.Context) {
 func (h *BoatHandler) DeleteBoat(c *gin.Context) {
 	id := c.Param("id")
 	if err := h.service.DeleteBoat(id); err != nil {
-		c.JSON(500, gin.H{"message": "Delete failed"})
+		c.JSON(500, gin.H{"message": "Delete failed", "error": err.Error()})
 		return
 	}
 	c.Status(204)
