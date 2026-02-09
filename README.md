@@ -49,7 +49,8 @@ Pour tester l'API, vous pouvez importer la collection fournie :
 
 1.  Ouvrez **Postman**.
 2.  Cliquez sur **Import** et sélectionnez le fichier `FisherFans.postman_collection.json`.
-3.  Configurez une variable d'environnement `base_url` : `http://localhost:8080/api/v1`.
+3.  Configurez une variable d'environnement - `SERVER_ADDRESS` : `0.0.0.0`.
+                                            - `SERVER_PORT` : `8080`.
 4.  Les dossiers Postman suivent l'ordre logique : User -> Boat -> Log -> Trip -> Reservation.
 
 ---
